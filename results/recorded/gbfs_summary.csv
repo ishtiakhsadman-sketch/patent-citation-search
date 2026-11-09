@@ -1,0 +1,11 @@
+Measure,Value
+Pairs tested,50.0
+Success rate (%),100.0
+Valid paths among found paths (%),100.0
+Average path cost,8.04
+Average solution depth,8.04
+Average nodes expanded,215.1
+Average max frontier size,30.6
+Average time per pair (ms),0.567
+Average peak traced memory (KiB),16.3
+Total time for all pairs (s),0.284

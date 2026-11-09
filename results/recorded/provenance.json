@@ -1,0 +1,83 @@
+{
+  "description": "Archived notebook execution, separate from fresh package runs",
+  "source_notebook_sha256": "9e0b0dee453114658010ee232f305931709a6463c4846ee5bc11cc163e7588ac",
+  "source_report_sha256": "8b6a0f2d54d8437e1c146bf663d8c77879ab38d2bbb68f122747bdc331d339e7",
+  "dataset_sha256": {
+    "cit-Patents.txt": "d2a11214ec084e3767f147e8736fc9f723aea5f1b067632007d5206cf54c8529",
+    "cit-Patents.txt.gz": "9d05955aa997fbc84953c9eb7786675af80336a356404e75dc18aaa90d3553b0"
+  },
+  "export_sha256": {
+    "expansion_analysis.csv": "073beccf6a2aa27f048e3828955b8769d366ddc392910afbac80d17c33be39e2",
+    "time_taken.csv": "ffe531f136bde572ed3ebd279387d0443c83b239c562ac557c262cb2e331a02f",
+    "ucs_results.csv": "5b468f1f09a4d196ed1eaac4dc580401b11f599dbff6aa94798cc814ea63a64c",
+    "gbfs_results.csv": "bc058e8ec8d4a3134611ecdb5a3b8130448bd66c759b8783ab0f58e30aaf98cc",
+    "pair_optimality.csv": "1d083eedbaecd9b48914838424f2f1d0471c8ac87328fdcaf2366b068d81587c",
+    "report_data.json": "34c29ea77ccb45a690b329e4074cd52c692c11d144a308b8532e309cf847e7b0",
+    "depth_sensitivity.csv": "0e500755493a4d2431c9208ec2fcea0a3be5f57c92ae34b9062504753c5240f0",
+    "expansion_orders.csv": "7306cca104d520adfa6f24b7b59b88774aa532ffd91ac1d32d7f6abe951876ad",
+    "comparison.csv": "5ef3a5cee1177c5ca5e21d923e0b3d4dddeb1f899c574a6a5393bc5d694f8d2c",
+    "depth_pair_results.csv": "8aa8c7de0c164f348b1ee5dd569fc5c30f712a7658b2d50db8921c0138384e89",
+    "gbfs_summary.csv": "fab8b6b720e7d92efac9efbf196e13e4e160504a0829b3b4cf7fa8140ccfdfbe",
+    "ucs_summary.csv": "1e31a37b6802a1541f0b0ea9b2fb5562c1a3b372af849b27e8db549fdcc45820"
+  },
+  "recorded_figure_provenance": {
+    "figures/toy_state_space.png": {
+      "notebook_cell_zero_based": 6,
+      "sha256": "d9f5f15b723a6881c2f446d525b406278d02ff789cfa8e1950421e5286e84d7f",
+      "identical_media_in_academic_report": true
+    },
+    "figures/workflow.png": {
+      "notebook_cell_zero_based": 8,
+      "sha256": "c901bd4d1970e0c26644e9ac33fed07c68ce78060bd59cfd4bfa19620aa91bbc",
+      "identical_media_in_academic_report": true
+    },
+    "figures/degree_distributions.png": {
+      "notebook_cell_zero_based": 16,
+      "sha256": "4e187257875629f6c22130e614a4f18b0888ce54511a876d90a639d37d3a4fdc",
+      "identical_media_in_academic_report": true
+    },
+    "figures/ucs_per_pair.png": {
+      "notebook_cell_zero_based": 41,
+      "sha256": "5f22d03121ec9e407decfbf7b760a6b5aeb48f496277f12fddcbda278b78ea0a",
+      "identical_media_in_academic_report": true
+    },
+    "figures/gbfs_per_pair.png": {
+      "notebook_cell_zero_based": 44,
+      "sha256": "1d081a0d8c283e2e2333f99435e45485e049802fa3fc96d854e33af215957423",
+      "identical_media_in_academic_report": true
+    },
+    "figures/performance.png": {
+      "notebook_cell_zero_based": 47,
+      "sha256": "cb74d25f62e9a8c393441a4e99bf975e72c9e35a9baadfb49df7408878e35546",
+      "identical_media_in_academic_report": true
+    },
+    "figures/selected_states.png": {
+      "notebook_cell_zero_based": 48,
+      "sha256": "a9745e6201016c0804a87bf920e1312a07024acd99a0a8cb572e615724bc7c6a",
+      "identical_media_in_academic_report": true
+    },
+    "figures/solution_depth.png": {
+      "notebook_cell_zero_based": 54,
+      "sha256": "e9a64e5b7e25ada37e960f00f6eace67878bd3b6ea602e6b8e915183a6bfd2d2",
+      "identical_media_in_academic_report": false
+    },
+    "figures/depth_sensitivity.png": {
+      "notebook_cell_zero_based": 57,
+      "sha256": "3e2853415ede9cc3d07bcbdfdf2f169102caccef19ba12815238b3c0b26a32e3",
+      "identical_media_in_academic_report": true
+    },
+    "figures/toy_expansion_trees.png": {
+      "notebook_cell_zero_based": 61,
+      "sha256": "cc4e2bdbae1d8925fe7238f6f883429d584691fb297af120e122072de34d3ffe",
+      "identical_media_in_academic_report": true
+    },
+    "figures/expansion_order.png": {
+      "notebook_cell_zero_based": 63,
+      "sha256": "3f52b8a2814771b09b76a34d4945ce3f7e1541252791d46fc384a467cf4a5a0a",
+      "identical_media_in_academic_report": true
+    }
+  },
+  "checked_against_saved_notebook_tables": 9,
+  "checked_academic_report_main_pairs": 50,
+  "recorded_depth_pair_count": 63
+}

@@ -1,0 +1,10 @@
+Measure,UCS,GBFS
+Success rate (%),100.0,100.0
+Valid paths among found paths (%),100.0,100.0
+Average path cost,8.04,8.04
+Average solution depth,8.04,8.04
+Average nodes expanded,293.0,215.1
+Average max frontier size,97.4,30.6
+Average time per pair (ms),1.892,0.567
+Average peak traced memory (KiB),37.7,16.3
+Total time for all pairs (s),0.901,0.284

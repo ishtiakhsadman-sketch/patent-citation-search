@@ -1,0 +1,7 @@
+Step,Seconds
+Load dataset,2.83
+Data processing and graph build,3.11
+Choose pairs,0.44
+Run UCS,0.9
+Run GBFS,0.28
+Elapsed through Section 5.4,15.17

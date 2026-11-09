@@ -1,0 +1,7 @@
+exact depth,pairs,source attempts,UCS avg cost,GBFS avg cost,GBFS optimal (%),UCS avg nodes,GBFS avg nodes
+2,20,28,2.0,2.0,100.0,10.4,11.6
+4,20,119,4.0,4.0,100.0,68.0,58.3
+6,20,591,6.0,6.0,100.0,170.8,142.8
+8,3,2000,8.0,8.0,100.0,377.0,314.3
+10,0,2000,,,,,
+12,0,2000,,,,,

@@ -1,0 +1,61 @@
+{
+  "status": "pass",
+  "tables": {
+    "ucs_results.csv": {
+      "rows": 50,
+      "columns_compared": 10
+    },
+    "gbfs_results.csv": {
+      "rows": 50,
+      "columns_compared": 10
+    },
+    "pair_optimality.csv": {
+      "rows": 50,
+      "columns_compared": 18
+    },
+    "depth_sensitivity.csv": {
+      "rows": 6,
+      "columns_compared": 8
+    },
+    "depth_pair_results.csv": {
+      "rows": 63,
+      "columns_compared": 18
+    },
+    "expansion_analysis.csv": {
+      "rows": 2,
+      "columns_compared": 5
+    },
+    "expansion_orders.csv": {
+      "rows": 32,
+      "columns_compared": 2
+    }
+  },
+  "graph_fields": [
+    "raw_rows",
+    "self_citations",
+    "duplicate_edges",
+    "nodes",
+    "edges",
+    "citing_nodes",
+    "dead_ends",
+    "branching_factor",
+    "max_branching",
+    "smaller_number_pct"
+  ],
+  "independent_bfs_checks": 50,
+  "excluded_measurements": [
+    "runtime",
+    "traced memory",
+    "elapsed wall time"
+  ],
+  "fresh_environment": {
+    "Python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.8",
+    "system": "Linux",
+    "architecture": "x86_64"
+  },
+  "code_cells_executed": 5,
+  "kernel": "fresh in-process Jupyter kernel"
+}

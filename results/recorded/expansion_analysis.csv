@@ -1,0 +1,3 @@
+algorithm,selected states,states outside final route,heuristic increases,goal selection step
+UCS,32,23,22,32
+GBFS,28,19,15,28

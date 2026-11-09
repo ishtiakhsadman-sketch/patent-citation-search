@@ -1,0 +1,26 @@
+test_corrupt_archive_has_no_published_partial_text (test_data_and_sampling.DatasetTests.test_corrupt_archive_has_no_published_partial_text) ... ok
+test_download_unpack_and_cache_with_stubbed_snap (test_data_and_sampling.DatasetTests.test_download_unpack_and_cache_with_stubbed_snap) ... ok
+test_preserves_insertion_order_direction_and_cited_only_nodes (test_data_and_sampling.DatasetTests.test_preserves_insertion_order_direction_and_cited_only_nodes) ... ok
+test_rejects_wrong_number_of_columns (test_data_and_sampling.DatasetTests.test_rejects_wrong_number_of_columns) ... ok
+test_exact_sample_and_empty_depth_budget (test_data_and_sampling.SamplingTests.test_exact_sample_and_empty_depth_budget) ... ok
+test_main_budget_shortfall_raises (test_data_and_sampling.SamplingTests.test_main_budget_shortfall_raises) ... ok
+test_main_sample_is_reachable_distinct_and_repeatable (test_data_and_sampling.SamplingTests.test_main_sample_is_reachable_distinct_and_repeatable) ... ok
+test_missing_routes_do_not_dilute_validity_among_found (test_evaluation.EvaluationTests.test_missing_routes_do_not_dilute_validity_among_found) ... ok
+test_pair_join_checks_identity_and_hop_delta (test_evaluation.EvaluationTests.test_pair_join_checks_identity_and_hop_delta) ... ok
+test_recorded_files_match_provenance (test_evaluation.EvaluationTests.test_recorded_files_match_provenance) ... ok
+test_timing_protocol_uses_five_runs_and_separate_memory_run (test_evaluation.EvaluationTests.test_timing_protocol_uses_five_runs_and_separate_memory_run) ... ok
+test_cycle_with_reachable_and_unreachable_goals (test_search.SearchTests.test_cycle_with_reachable_and_unreachable_goals) ... ok
+test_greedy_can_choose_a_longer_unit_cost_route (test_search.SearchTests.test_greedy_can_choose_a_longer_unit_cost_route) ... ok
+test_invalid_routes_and_wrong_direction (test_search.SearchTests.test_invalid_routes_and_wrong_direction) ... ok
+test_later_improvement_replaces_route_and_skips_stale_entry (test_search.SearchTests.test_later_improvement_replaces_route_and_skips_stale_entry) ... ok
+test_original_unit_routes_and_counters (test_search.SearchTests.test_original_unit_routes_and_counters) ... ok
+test_original_weighted_counterexample (test_search.SearchTests.test_original_weighted_counterexample) ... ok
+test_rejects_invalid_encountered_weights (test_search.SearchTests.test_rejects_invalid_encountered_weights) ... ok
+test_source_equals_goal (test_search.SearchTests.test_source_equals_goal) ... ok
+test_ties_prefer_smaller_state_identifier (test_search.SearchTests.test_ties_prefer_smaller_state_identifier) ... ok
+test_zero_weight_cycle_and_nonnegative_costs (test_search.SearchTests.test_zero_weight_cycle_and_nonnegative_costs) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.038s
+
+OK
