@@ -34,7 +34,7 @@ Let $g(n)$ be the cumulative cost of the route to state $n$, and $t$ the goal's 
 | Property | UCS | GBFS |
 | --- | --- | --- |
 | Evaluation function | $f(n)=g(n)$ | $f(n)=h(n)$ |
-| Heuristic | None | $h(n)=\lvert \operatorname{ID}(n)-\operatorname{ID}(t)\rvert$ |
+| Heuristic | None | `h(n) = abs(n - t)` |
 | Reaching a known state | Enqueue a strictly cheaper route, then skip stale entries on selection | Keep the first generated route and mark the state seen |
 | Finite graph completeness | Complete with finite nonnegative weights | Complete with finite reachable states and duplicate detection |
 | Cost guarantee | Minimum total cost for finite nonnegative weights | First returned route may be longer or more expensive |
