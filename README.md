@@ -68,6 +68,7 @@ GBFS(start, goal):
     return no route
 ```
 
+![UCS and GBFS expansion trees on a toy graph](results/recorded/figures/toy_expansion_trees.png)
 Patent numbers usually decrease along citations. In this filtered graph, **99.9877%** of edges lead to a smaller ID. A small ID gap can still lead to a dead end or a detour. A direct citation can span a large ID gap in a single hop, so this heuristic can overestimate the true distance. [Detailed methodology and complexity](docs/methodology.md)
 
 ## Experimental setup
@@ -109,9 +110,13 @@ GBFS matched UCS cost on **50/50** pairs and selected fewer states on **47**, wi
 | 12 | 0 | 2,000 | N/A | N/A | N/A |
 
 At depth 2, GBFS selected more states on average. The weighted toy example returns a cost-4 route with UCS and a cost-20 route with GBFS. On real pair 1, both found the same eight-hop path, with **32** UCS selections and **28** GBFS selections. The route includes the increasing-number edge `5191197 → 5509778`. [Depth data](results/recorded/depth_sensitivity.csv) · [Expansion analysis](results/recorded/expansion_analysis.csv)
+![UCS and GBFS expansion order for the first patent pair](results/recorded/figures/expansion_order.png)
+
+*First patent pair. Both algorithms found the same 8-hop route. UCS selected 32 patents and GBFS selected 28.*
 
 ![Recorded mean selections at each sampled shortest-path depth](results/recorded/figures/depth_sensitivity.png)
 
+*Average selections by solution depth. The depth-8 average is based on three pairs. The sampling budget yielded no pairs at depths 10 or 12.*
 ## Repository map
 
 | Path | Contents |
