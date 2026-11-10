@@ -2,6 +2,18 @@
 
 A reproducible comparison of **Uniform Cost Search (UCS)** and **Greedy Best-First Search (GBFS)** for finding directed citation chains in the Stanford SNAP US patent graph. On the 50 recorded reachable tasks, both algorithms returned valid shortest-hop routes. GBFS selected **26.6% fewer states** and used a **68.6% smaller mean maximum frontier**. The depth experiment and weighted example show where that advantage can disappear.
 
+## Key findings at a glance
+
+| Question | Answer from the recorded run |
+| --- | --- |
+| Did both algorithms solve every task? | Yes. 50/50 reachable pairs, and every returned route passed the edge-by-edge validator. |
+| Did GBFS give up route quality for speed? | Not on this sample. GBFS matched the UCS cost on 50/50 pairs (mean 8.04 hops). |
+| How much less work did GBFS do? | 26.6% fewer selected states (14,649 for UCS vs 10,756 for GBFS across all 50 pairs). |
+| Was GBFS consistently faster? | Yes. Lower median search time on 50/50 pairs and lower traced memory on 50/50 pairs. |
+| Biggest single saving | Pair 42: 1,460 selected states for UCS against 704 for GBFS. |
+| Where does GBFS lose its edge? | At depth 2 it selected more states (11.6 vs 10.4), and on the weighted toy graph it returns cost 20 against 4 for UCS. |
+| Which algorithm is recommended overall? | GBFS for fast unit-cost search with this heuristic, UCS when optimality must be guaranteed, and A* as the next algorithm to test. |
+
 ## Quick start
 
 Use **Python 3.12**. Run these commands from the repository root after cloning or extracting the ZIP. Allow several GB of available RAM for the pandas edge list and Python graph.
@@ -27,6 +39,20 @@ Given two patent IDs, find a directed path from the source to the goal. An edge 
 
 The SNAP `cit-Patents` file contains **16,518,948** directed citation records. Preprocessing removes one self-loop, retains edges with **both IDs at least 5,000,000**, and checks for duplicate retained edges. The resulting graph has **892,138 states**, **2,709,934 edges**, and **641,971 citing states**. Cited-only states are valid destinations with no successors in the retained graph. The adjacency list preserves file order for repeatable sampling. The release includes a download workflow and checksums. [SNAP dataset](https://snap.stanford.edu/data/cit-Patents.html) · [Recorded provenance](results/recorded/provenance.json)
 
+### Graph at a glance
+
+| Property | Value |
+| --- | ---: |
+| Raw citation records | 16,518,948 |
+| States (patents) after filtering | 892,138 |
+| Directed edges | 2,709,934 |
+| Citing states / dead ends | 641,971 / 250,167 |
+| Mean out-degree of citing states | 4.22 |
+| Largest out-degree | 332 |
+| Edges pointing to a smaller patent number | 99.9877% |
+
+![Citations made and received per patent](results/recorded/figures/degree_distributions.png)
+
 ## Search algorithms
 
 Let $g(n)$ be the cumulative cost of the route to state $n$, and $t$ the goal's numeric patent ID. Each real-data edge costs one, so $g(n)$ is the route's hop count.
@@ -34,7 +60,7 @@ Let $g(n)$ be the cumulative cost of the route to state $n$, and $t$ the goal's 
 | Property | UCS | GBFS |
 | --- | --- | --- |
 | Evaluation function | $f(n)=g(n)$ | $f(n)=h(n)$ |
-| Heuristic | None | $h(n)=\lvert \operatorname{ID}(n)-\operatorname{ID}(t)\rvert$ |
+| Heuristic | None | $h(n)=\lvert \mathrm{ID}(n)-\mathrm{ID}(t)\rvert$ |
 | Reaching a known state | Enqueue a strictly cheaper route, then skip stale entries on selection | Keep the first generated route and mark the state seen |
 | Finite graph completeness | Complete with finite nonnegative weights | Complete with finite reachable states and duplicate detection |
 | Cost guarantee | Minimum total cost for finite nonnegative weights | First returned route may be longer or more expensive |
@@ -122,6 +148,24 @@ GBFS matched UCS cost on **50/50** pairs and selected fewer states on **47**, wi
 At depth 2, GBFS selected more states on average. The weighted toy example returns a cost-4 route with UCS and a cost-20 route with GBFS. On real pair 1, both found the same eight-hop path, with **32** UCS selections and **28** GBFS selections. The route includes the increasing-number edge `5191197 → 5509778`. [Depth data](results/recorded/depth_sensitivity.csv) · [Expansion analysis](results/recorded/expansion_analysis.csv)
 
 ![Recorded mean selections at each sampled shortest-path depth](results/recorded/figures/depth_sensitivity.png)
+
+## Search behaviour in pictures
+
+**Worked example on the toy graph.** UCS expands six nodes and returns `[1, 2, 4, 6]`. GBFS expands four nodes and returns `[1, 3, 5, 6]`. Red edges mark the returned route.
+
+![Search trees built by UCS and GBFS on the toy graph](results/recorded/figures/toy_expansion_trees.png)
+
+**Per-pair effort on the real graph.** GBFS selected the same number or fewer states on every one of the 50 pairs, with the largest gap on pair 42 (1,460 vs 704).
+
+![Selected states for each of the 50 pairs](results/recorded/figures/selected_states.png)
+
+**Expansion order for pair 1.** Both algorithms return the same eight-hop route. UCS selects 32 patents, 23 of them outside the route. GBFS selects 28, 19 of them outside the route.
+
+![Order in which UCS and GBFS selected patents for pair 1](results/recorded/figures/expansion_order.png)
+
+**Example solution (pair 1, source 5973621, goal 5020969, cost 8):**
+
+`5973621 → 5691716 → 5459461 → 5305181 → 5191197 → 5509778 → 5284417 → 5080554 → 5020969`
 
 ## Repository map
 
