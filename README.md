@@ -34,7 +34,7 @@ Let $g(n)$ be the cumulative cost of the route to state $n$, and $t$ the goal's 
 | Property | UCS | GBFS |
 | --- | --- | --- |
 | Evaluation function | $f(n)=g(n)$ | $f(n)=h(n)$ |
-| Heuristic | None | `h(n) = abs(n - t)` |
+| Heuristic | None | $h(n)=\lvert \operatorname{ID}(n)-\operatorname{ID}(t)\rvert$ |
 | Reaching a known state | Enqueue a strictly cheaper route, then skip stale entries on selection | Keep the first generated route and mark the state seen |
 | Finite graph completeness | Complete with finite nonnegative weights | Complete with finite reachable states and duplicate detection |
 | Cost guarantee | Minimum total cost for finite nonnegative weights | First returned route may be longer or more expensive |
@@ -68,7 +68,6 @@ GBFS(start, goal):
     return no route
 ```
 
-![UCS and GBFS expansion trees on a toy graph](results/recorded/figures/toy_expansion_trees.png)
 Patent numbers usually decrease along citations. In this filtered graph, **99.9877%** of edges lead to a smaller ID. A small ID gap can still lead to a dead end or a detour. A direct citation can span a large ID gap in a single hop, so this heuristic can overestimate the true distance. [Detailed methodology and complexity](docs/methodology.md)
 
 ## Experimental setup
@@ -84,19 +83,30 @@ The expansion counter counts every selected non-stale state, including the goal.
 
 ## Recorded results
 
-| Metric across 50 pairs | UCS | GBFS |
-| --- | ---: | ---: |
-| Valid routes and successful searches | 50/50 | 50/50 |
-| Average path cost and depth (hops) | 8.04 | 8.04 |
-| Average selected states | 293.0 | 215.1 |
-| Average maximum frontier | 97.4 | 30.6 |
-| Average median search time (ms) | 1.892 | 0.567 |
-| Average peak traced memory (KiB) | 37.7 | 16.3 |
-| Evaluation harness elapsed time (s) | 0.901 | 0.284 |
+| Metric across 50 pairs | UCS | GBFS | Winner |
+| --- | ---: | ---: | :---: |
+| Valid routes and successful searches | 50/50 | 50/50 | Tie |
+| Average path cost and depth (hops) | 8.04 | 8.04 | Tie |
+| Average selected states | 293.0 | 215.1 | GBFS |
+| Average maximum frontier | 97.4 | 30.6 | GBFS |
+| Average median search time (ms) | 1.892 | 0.567 | GBFS |
+| Average peak traced memory (KiB) | 37.7 | 16.3 | GBFS |
+| Evaluation harness elapsed time (s) | 0.901 | 0.284 | GBFS |
+
+Lower is better for every cost metric. UCS wins the one non-measured property: it alone guarantees a minimum-cost route.
 
 GBFS matched UCS cost on **50/50** pairs and selected fewer states on **47**, with equal counts on **3**. Forty-eight pairs had shortest depth 8 and two had shortest depth 9. Smaller frontiers give the list-based implementation fewer entries to scan and fewer routes to hold at once. Mean median search time and mean traced memory were **70.0%** and **56.7%** lower, respectively, using unrounded recorded inputs. Harness elapsed time includes repeated runs, tracing, and validation. [All 50 pairs](results/recorded/pair_optimality.csv) · [Recorded comparison](results/recorded/comparison.csv)
 
 ![Recorded means for selected states, maximum frontier, runtime, and traced memory](results/recorded/figures/performance.png)
+
+### Winner by scenario
+
+| Scenario | Winner | Evidence |
+| --- | :---: | --- |
+| Shallow searches (2 hops) | UCS | 10.4 vs 11.6 mean selected states |
+| Deeper searches (4 to 8 hops) | GBFS | Fewer mean selected states at depths 4, 6 and 8 (depth 8 has only 3 pairs) |
+| Weighted edge costs | UCS | Toy example: cost 4 vs 20 |
+| Speed and memory on the unit-cost graph | GBFS | 70.0% faster, 56.7% less traced memory, optimal on 50/50 pairs |
 
 ### Where the heuristic helps and where it can fail
 
@@ -110,13 +120,9 @@ GBFS matched UCS cost on **50/50** pairs and selected fewer states on **47**, wi
 | 12 | 0 | 2,000 | N/A | N/A | N/A |
 
 At depth 2, GBFS selected more states on average. The weighted toy example returns a cost-4 route with UCS and a cost-20 route with GBFS. On real pair 1, both found the same eight-hop path, with **32** UCS selections and **28** GBFS selections. The route includes the increasing-number edge `5191197 → 5509778`. [Depth data](results/recorded/depth_sensitivity.csv) · [Expansion analysis](results/recorded/expansion_analysis.csv)
-![UCS and GBFS expansion order for the first patent pair](results/recorded/figures/expansion_order.png)
-
-*First patent pair. Both algorithms found the same 8-hop route. UCS selected 32 patents and GBFS selected 28.*
 
 ![Recorded mean selections at each sampled shortest-path depth](results/recorded/figures/depth_sensitivity.png)
 
-*Average selections by solution depth. The depth-8 average is based on three pairs. The sampling budget yielded no pairs at depths 10 or 12.*
 ## Repository map
 
 | Path | Contents |
@@ -142,7 +148,11 @@ The sampled tasks are reachable in the filtered graph and the main sample is con
 
 ## Future work
 
-Try depth-balanced sampling and several patent-ID thresholds. Compare heap-backed frontiers and parent pointers in a separate benchmark to quantify implementation effects. A* with $f(n)=g(n)+h(n)$ could balance cost and guidance using a justified admissible heuristic, with consistency or reopening handled explicitly. Use BFS as a unit-cost baseline and evaluate bidirectional search with reverse adjacency. These are proposed experiments.
+Try depth-balanced sampling and several patent-ID thresholds. Compare heap-backed frontiers and parent pointers in a separate benchmark to quantify implementation effects. Use BFS as a unit-cost baseline and evaluate bidirectional search with reverse adjacency. These are proposed experiments.
+
+### Recommended alternative: A* search
+
+A* orders the frontier by $f(n)=g(n)+h(n)$. It keeps the path-cost term that gives UCS its optimality guarantee and adds a goal estimate as GBFS does, so it can combine the shortest route with less search effort. The guarantee holds only if $h(n)$ never overestimates the remaining hops. The patent-ID gap used by GBFS does not meet this condition: for pair 1 it is 952,652 against a true distance of 8 hops. It would need to be scaled down or replaced by a hop-based lower bound, with consistency or reopening handled explicitly. Weighted A*, $f(n)=g(n)+w\cdot h(n)$, is the speed-oriented variant and accepts a bounded loss of optimality. A* was not implemented or benchmarked here; this recommendation follows from search theory and is a direction for future testing.
 
 ## References and licensing
 
