@@ -194,10 +194,6 @@ The sampled tasks are reachable in the filtered graph and the main sample is con
 
 Try depth-balanced sampling and several patent-ID thresholds. Compare heap-backed frontiers and parent pointers in a separate benchmark to quantify implementation effects. Use BFS as a unit-cost baseline and evaluate bidirectional search with reverse adjacency. These are proposed experiments.
 
-### Recommended alternative: A* search
-
-A* orders the frontier by $f(n)=g(n)+h(n)$. It keeps the path-cost term that gives UCS its optimality guarantee and adds a goal estimate as GBFS does, so it can combine the shortest route with less search effort. The guarantee holds only if $h(n)$ never overestimates the remaining hops. The patent-ID gap used by GBFS does not meet this condition: for pair 1 it is 952,652 against a true distance of 8 hops. It would need to be scaled down or replaced by a hop-based lower bound, with consistency or reopening handled explicitly. Weighted A*, $f(n)=g(n)+w\cdot h(n)$, is the speed-oriented variant and accepts a bounded loss of optimality. A* was not implemented or benchmarked here; this recommendation follows from search theory and is a direction for future testing.
-
 ## References and licensing
 
 The original report's references include Russell and Norvig for search theory, Dijkstra for shortest paths, and Leskovec, Kleinberg, and Faloutsos for the SNAP citation network. [Full references](docs/references.md)
